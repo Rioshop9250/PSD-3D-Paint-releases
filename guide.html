@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>使い方ガイド — PSD 3D Paint</title>
+  <meta name="description" content="PSD 3D Paint の操作説明。3D モデルの読み込み、ペイント、レイヤー、透過テクスチャ、アニメーション、VRChat ロコモーション、Unity 書き出し、ショートカット。" />
+  <meta property="og:title" content="使い方ガイド — PSD 3D Paint" />
+  <meta property="og:image" content="images/og.jpg" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+      <button class="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+      <nav class="nav">
+        <a href="index.html">トップ</a>
+        <a href="guide.html" class="active">使い方</a>
+        <a href="plugins.html">プラグイン</a>
+        <a href="faq.html">よくある質問</a>
+        <a class="btn primary" href="download.html">ダウンロード</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="page-head">
+      <h1>使い方ガイド</h1>
+      <p>はじめての方は「はじめる」から順に読んでください。各機能の詳しい説明は、アプリの <strong>ヘルプ ＞ 説明書</strong>（<a href="files/MANUAL.txt">説明書（テキスト）</a>）にもあります。</p>
+    </div>
+
+    <div class="docs">
+      <aside class="toc" aria-label="目次">
+        <p class="toc-title">目次</p>
+        <ol>
+          <li><a href="#start">はじめる</a></li>
+          <li><a href="#screen">画面の見かた</a></li>
+          <li><a href="#view">3D ビューの操作</a></li>
+          <li><a href="#paint">塗る</a></li>
+          <li><a href="#layers">レイヤー</a></li>
+          <li><a href="#isolate">メッシュ・パーツだけ表示</a></li>
+          <li><a href="#textures">テクスチャの取り込み</a></li>
+          <li><a href="#material">マテリアルと透過</a></li>
+          <li><a href="#filters">フィルター・模様</a></li>
+          <li><a href="#normal">凹凸（ノーマル）</a></li>
+          <li><a href="#bake">ベイク</a></li>
+          <li><a href="#anim">アニメーション</a></li>
+          <li><a href="#vrc">VRChat ロコモーション</a></li>
+          <li><a href="#unity">Unity へ書き出し</a></li>
+          <li><a href="#layout">レイアウト</a></li>
+          <li><a href="#perf">軽量表示</a></li>
+          <li><a href="#save">保存と書き出し</a></li>
+          <li><a href="#update">アップデート</a></li>
+          <li><a href="#keys">ショートカット</a></li>
+        </ol>
+      </aside>
+
+      <article class="content">
+        <section id="start">
+          <h2>はじめる</h2>
+          <p>起動するとスタート画面が開きます。ここから作業を始めます。</p>
+          <figure class="shot mid"><img src="images/welcome.webp" width="1080" height="498" loading="lazy" alt="スタート画面" /></figure>
+          <ol>
+            <li><strong>3D モデルを開く…</strong> で <code>.fbx</code> / <code>.glb</code> / <code>.vrm</code> / <code>.obj</code> などを選びます。モデルが無くても、<strong>形状</strong> メニューの球・箱・円柱などで試せます。</li>
+            <li>モデルと同じフォルダーにテクスチャ画像があれば、<a href="#textures">割り当て画面</a> が出ます。「取り込む」を押すと、マテリアルごとのレイヤーグループになります。</li>
+            <li>左のツール列から <strong>ブラシ</strong>（<kbd>B</kbd>）を選び、モデルの表面をドラッグして塗ります。</li>
+            <li><kbd>Ctrl</kbd>+<kbd>S</kbd> でプロジェクト（<code>.p3dp</code>）として保存。完成したら <strong>ファイル ＞ PSD を書き出す</strong>（<kbd>Ctrl</kbd>+<kbd>E</kbd>）や PNG で書き出します。</li>
+          </ol>
+          <div class="tip"><strong>ドラッグ＆ドロップでも開けます。</strong> 画像・3D モデル・PSD・プロジェクトをウィンドウのどこへ落としても読み込めます。</div>
+        </section>
+
+        <section id="screen">
+          <h2>画面の見かた</h2>
+          <figure class="shot"><img src="images/hero-paint.webp" width="1600" height="904" loading="lazy" alt="ペイント画面の全体" /></figure>
+          <ul>
+            <li><strong>上</strong>: メニューバーと、右端の <strong>ペイント / アニメーション</strong> のワークスペース切り替え（<kbd>Ctrl</kbd>+<kbd>1</kbd> / <kbd>Ctrl</kbd>+<kbd>2</kbd>）。その下に、選んでいるツールの設定（サイズ・硬さ・不透明度など）。</li>
+            <li><strong>左</strong>: ツール列（上のタブで 描画 / 補正 / 選択 / 全部 を切り替え）と、カラー・ツール設定・ブラシ効果のタブ。</li>
+            <li><strong>中央</strong>: <strong>3D ビュー｜2D（テクスチャ）｜並べて表示</strong> のタブ。</li>
+            <li><strong>右</strong>: レイヤー・マテリアル・チャンネル、ライト・クイック調整・ベイク設定、オブジェクト（アウトライナー）などのパネル。</li>
+            <li><strong>下</strong>: ステータスバー。いま描き込まれる先（カラー / 法線、どのレイヤー）と、操作のヒントが出ます。</li>
+          </ul>
+          <p>複数の作品を同時に開くときは、上のタブ（<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd>）や新しいウィンドウ（<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd>）を使います。タブごとにレイヤーや履歴は完全に独立しています。</p>
+        </section>
+
+        <section id="view">
+          <h2>3D ビューの操作</h2>
+          <p>Blender と同じ操作です。</p>
+          <table>
+            <thead><tr><th>操作</th><th>割り当て</th></tr></thead>
+            <tbody>
+              <tr><td>回転</td><td>中ボタンドラッグ</td></tr>
+              <tr><td>平行移動</td><td><kbd>Shift</kbd> + 中ボタンドラッグ</td></tr>
+              <tr><td>ズーム</td><td>ホイール、または <kbd>Ctrl</kbd> + 中ボタンドラッグ</td></tr>
+              <tr><td>正面 / 右 / 上</td><td>テンキー <kbd>1</kbd> / <kbd>3</kbd> / <kbd>7</kbd>（<kbd>Shift</kbd> で反対側）</td></tr>
+              <tr><td>透視 ⇔ 平行投影</td><td>テンキー <kbd>5</kbd></td></tr>
+              <tr><td>全体を表示</td><td>テンキー <kbd>.</kbd></td></tr>
+            </tbody>
+          </table>
+          <p><strong>表示 ＞ 表示モード</strong> で、レンダリング（ライトと影あり）・トゥーン・影なし（テクスチャの色そのまま）を切り替えられます。右上の <strong>リアル / トゥーン / フラット</strong> ボタンでも同じです。</p>
+        </section>
+
+        <section id="paint">
+          <h2>塗る</h2>
+          <p>ブラシ・鉛筆・エアブラシ・消しゴム・にじみ・ぼかし・塗りつぶし・グラデーション・テクスチャブラシ・クローン・修復・覆い焼き・焼き込み・テキスト・パスが使えます。3D ビューでも 2D ビューでも、同じように塗れます。</p>
+          <figure class="shot"><img src="images/split-view.webp" width="1600" height="904" loading="lazy" alt="3D と 2D を並べて表示" /><figcaption>「並べて表示」なら、3D で塗った所がテクスチャのどこに当たるか、すぐ分かります。</figcaption></figure>
+          <ul>
+            <li>ブラシサイズは <kbd>[</kbd> <kbd>]</kbd>、または <kbd>Alt</kbd> + 右ドラッグ（左右でサイズ、上下で不透明度）。</li>
+            <li>右クリック（動かさずに）でその場所の色を拾います（一時スポイト）。</li>
+            <li><kbd>Shift</kbd> + クリックで、前のストロークの終わりから直線を引きます。</li>
+            <li><kbd>1</kbd>〜<kbd>9</kbd> / <kbd>0</kbd> で不透明度を 10〜90% / 100% に。</li>
+            <li>ペンタブレットの筆圧に対応（サイズ・不透明度に効かせられます）。</li>
+          </ul>
+          <h3>グラデーション（<kbd>Shift</kbd>+<kbd>G</kbd>）</h3>
+          <p>ツール設定で <strong>3D</strong> と <strong>2D</strong> を選べます。3D では、モデルの上を始点から終点へドラッグすると、表面の <strong>3D の位置</strong> で色が決まります。UV の継ぎ目や島をまたいでも、きれいにつながります。</p>
+          <h3>選択範囲</h3>
+          <p>矩形（<kbd>M</kbd>）・楕円・なげなわ（<kbd>L</kbd>）・ファジー選択（<kbd>U</kbd>）。選択中は、ブラシもフィルターも選択範囲の中だけに効きます。<kbd>Q</kbd> でクイックマスク。</p>
+        </section>
+
+        <section id="layers">
+          <h2>レイヤー</h2>
+          <div class="inline-shots">
+            <figure class="shot"><img src="images/layers-panel.webp" width="402" height="470" loading="lazy" alt="レイヤーパネル" /></figure>
+            <div style="flex:2 1 320px">
+              <p>Photoshop や CLIP STUDIO のようなレイヤーです。</p>
+              <ul>
+                <li>グループ・レイヤーマスク・クリッピング・調整レイヤー（明るさ・コントラスト、色相・彩度、トーンカーブなど）</li>
+                <li>16 種類の描画モードと不透明度</li>
+                <li>行を右クリックで、複製・結合・グループ化・マスク・メッシュへのひも付けなど</li>
+                <li><strong>削除</strong> ボタン（ゴミ箱）、右クリック ＞ 削除、または <kbd>Shift</kbd>+<kbd>Delete</kbd>。グループは中身ごと消える前に確認が出ます。</li>
+                <li>削除・新規・複製も <kbd>Ctrl</kbd>+<kbd>Z</kbd> で取り消せます。</li>
+              </ul>
+            </div>
+          </div>
+          <h3>メッシュごとに塗り分ける</h3>
+          <p>レイヤーグループをメッシュに <strong>ひも付け</strong>（🔗）ると、そのグループの絵がそのメッシュの色になります。ひも付いたグループには合成結果のサムネイルと「→ メッシュ名」のバッジが付きます。マテリアルパネルの <strong>このメッシュを描く</strong> を押せば、グループ作成からひも付けまで 1 クリックです。</p>
+        </section>
+
+        <section id="isolate">
+          <h2>メッシュ・パーツだけ表示</h2>
+          <p>モデルの中にメッシュがいくつもあるとき、見たい所だけを表示して塗れます。隠した部分は塗りの対象から外れるので、服の下や髪の内側など、ふだん見えない所も塗れます。</p>
+          <figure class="shot"><img src="images/isolate-mesh.webp" width="1600" height="904" loading="lazy" alt="Body メッシュだけを表示している" /><figcaption>カーソルを合わせて <kbd>/</kbd>。上に「『Body』だけ表示中」と出て、もう一度押すと元に戻ります。</figcaption></figure>
+          <table class="keys">
+            <thead><tr><th>キー</th><th>動作</th></tr></thead>
+            <tbody>
+              <tr><td><kbd>/</kbd>（テンキーの <kbd>/</kbd> も可）</td><td>カーソルの下のメッシュだけ表示（もう一度で戻す）</td></tr>
+              <tr><td><kbd>Shift</kbd>+<kbd>H</kbd></td><td>カーソルの下のパーツ（つながった部分）だけ表示</td></tr>
+              <tr><td><kbd>H</kbd></td><td>カーソルの下のパーツを隠す</td></tr>
+              <tr><td><kbd>Alt</kbd>+<kbd>H</kbd></td><td>すべて表示</td></tr>
+            </tbody>
+          </table>
+          <p>キーを使わなくても、3D ビュー左上の <strong>メッシュだけ / パーツだけ / パーツを隠す / すべて表示</strong> を押してからモデルをクリックすれば同じことができます。</p>
+        </section>
+
+        <section id="textures">
+          <h2>テクスチャの取り込み</h2>
+          <p>モデルを開くと、同じフォルダー（または FBX フォルダーの親）にあるテクスチャ画像を探して、マテリアルごとに使う画像を名前から自動で選んだ割り当て画面が出ます。例えば「Hair」には <code>Hair.png</code>、「Cos」には <code>TEX Cos.png</code> のように選ばれます。マスク・法線・AO などの画像は候補から外れます。</p>
+          <ul>
+            <li>必要なら選び直して <strong>取り込む</strong>。画像ごとのレイヤーグループができ、各メッシュのマテリアルにひも付きます。</li>
+            <li>同じ画像を使うマテリアルは 1 つのグループを共有するので、どれを塗っても同じ絵に描かれます。</li>
+            <li>「Hair_transparent」のような透過用マテリアルには、<strong>透過マスク</strong>（白 = 見える、黒 = 透明）も自動で選ばれます。</li>
+            <li>glb / VRM に埋め込まれたテクスチャも選べます。あとからでも <strong>ファイル ＞ モデルのテクスチャを取り込む</strong> で開けます。</li>
+          </ul>
+          <p>複数のマテリアルを持つメッシュは、読み込み時にマテリアルごとのメッシュ（例: Body → Body_Face / Body_Eye…）に分かれます。</p>
+        </section>
+
+        <section id="material">
+          <h2>マテリアルと透過</h2>
+          <div class="inline-shots">
+            <figure class="shot" style="flex:0 1 340px"><img src="images/material-panel.webp" width="402" height="885" loading="lazy" alt="マテリアルパネル" /></figure>
+            <div style="flex:2 1 320px">
+              <p>右の <strong>マテリアル</strong> タブで、選んだメッシュの見た目を調整します。</p>
+              <ul>
+                <li><strong>テクスチャ画像スロット</strong>: どのレイヤーグループをこのメッシュの色にするか。「このメッシュを描く」「＋ 新規」「画像を読み込む…」もここ。</li>
+                <li>ベース色・粗さ・金属度・発光</li>
+                <li>プラスチック・金属・発光などのクイック設定、他のメッシュへのコピー</li>
+              </ul>
+              <h3>透過（テクスチャのアルファ）</h3>
+              <p>テクスチャの透明な部分は、3D モデルでも透けて表示されます。</p>
+              <ul>
+                <li><strong>自動</strong>（既定）: 透明な画素があれば透かします。はっきり抜けた穴は「切り抜き」、なめらかな半透明が多ければ「半透明」に。</li>
+                <li><strong>切り抜き</strong>: 髪の毛先・まつ毛・レース向き。しきい値で抜ける濃さを調整。</li>
+                <li><strong>半透明</strong>: ガラスやグラデーション向き。</li>
+              </ul>
+              <p>消しゴムで消した所も、そのまま 3D で透けます。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="filters">
+          <h2>フィルター・模様</h2>
+          <div class="inline-shots">
+            <figure class="shot" style="flex:0 1 330px"><img src="images/filter-menu.webp" width="440" height="820" loading="lazy" alt="フィルターメニュー" /></figure>
+            <div style="flex:2 1 320px">
+              <p><strong>フィルター</strong> メニューに、ぼかし・シャープ・輪郭・変形・ノイズ・色調補正・芸術的など 50 種類以上があります。アクティブなレイヤー（またはマスク）に効き、取り消せます。<kbd>Ctrl</kbd>+<kbd>F</kbd> で直前のフィルターをもう一度。</p>
+              <p>右の <strong>クイック調整・生成</strong> パネルからは、明るさ・色相・レベル補正などの色調と、パーリン・雲・セルラー・木目・大理石などの模様を 1 クリックで呼び出せます。</p>
+              <p>メニュー下半分の項目は <a href="plugins.html">Python プラグイン</a> です。自分で追加することもできます。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="normal">
+          <h2>凹凸（ノーマル）</h2>
+          <p><kbd>Tab</kbd> でカラーと法線（凹凸）を切り替えます。法線モードでは、同じツールで <strong>盛り上げ・彫り込み・ならす・ざらつき</strong> を描けます。高ポリゴン化やベイクは不要で、塗るだけで凹凸が付きます。ビューの縁が青いときが法線モードです。</p>
+          <p>結果は <strong>法線 PNG を書き出す</strong> でノーマルマップとして保存できます。</p>
+        </section>
+
+        <section id="bake">
+          <h2>ベイク</h2>
+          <p><strong>ベイク</strong> メニューまたは <strong>ベイク設定</strong> パネルから、AO（アンビエントオクルージョン）・ライトの陰影・オブジェクト空間法線をテクスチャに焼き込めます。高ポリゴンのモデルから低ポリゴンへのタンジェント法線ベイクにも対応しています。</p>
+        </section>
+
+        <section id="anim">
+          <h2>アニメーション</h2>
+          <p>右上の <strong>アニメーション</strong>（<kbd>Ctrl</kbd>+<kbd>2</kbd>）に切り替えます。ボーンのあるモデル（ヒューマノイドなら最適）で使えます。</p>
+          <figure class="shot"><img src="images/anim-workspace.webp" width="1600" height="904" loading="lazy" alt="アニメーション ワークスペース" /></figure>
+          <ol>
+            <li><strong>コントローラーを自動セットアップ</strong> を押すと、手足の IK と体のコントローラーが付きます。腰の緑の四角い輪（腰 IK）を動かすと、胸から上はその場に残ったまま腰だけを揺らせます。</li>
+            <li>コントローラーをクリックして、<kbd>W</kbd> 移動 / <kbd>E</kbd> 回転 / <kbd>R</kbd> 拡縮 でポーズを付けます。<kbd>M</kbd> で左右反転。</li>
+            <li>タイムラインで時刻を選んで <kbd>K</kbd>（キー追加）。時刻を変えてポーズ → キー、をくり返します。<strong>自動キー</strong> を ON にすると、動かすだけでキーが入ります。</li>
+            <li><kbd>Space</kbd> で再生。<kbd>,</kbd> <kbd>.</kbd> で前後のキーへ。</li>
+          </ol>
+          <ul>
+            <li><strong>モーションのひな形</strong>: 待機（呼吸）・歩く・走る・手を振るなどを選ぶだけでキーが入ります。そこから手直しできます。</li>
+            <li>アニメーションモードの <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> は、キーの追加・削除・移動やポーズ変更を 1 手ずつ戻します（最大 100 手）。</li>
+            <li>FBX / glTF に入っているアニメーションクリップの再生と、キーフレームへの焼き込みもできます。</li>
+          </ul>
+        </section>
+
+        <section id="vrc">
+          <h2>VRChat ロコモーション</h2>
+          <p>アニメーションモードの左にある <strong>VRC ロコモーション</strong> タブで、VRChat の移動用アニメーションを一式作れます。</p>
+          <figure class="shot"><img src="images/vrc-locomotion.webp" width="1600" height="904" loading="lazy" alt="VRC ロコモーションパネル" /></figure>
+          <ol>
+            <li><strong>全スロットをまとめて作成</strong>: 待機・歩き（前後左右）・走り（前後左右）・ダッシュ・しゃがみ・伏せ・空中・着地の 19 スロットを自動で作ります。どれも <strong>その場で動き</strong>、ループのつなぎ目がそろった状態です。歩幅・腕の振り・上下の揺れ・前傾・テンポのスライダーで雰囲気を変えられます。</li>
+            <li>各スロットの <strong>編集</strong> でタイムラインに読み込み、手直しして <kbd>K</kbd>。変更はそのスロットに自動保存されます。「ループを閉じる」「その場に固定」「反対側を左右反転で作成」も使えます。</li>
+            <li><strong>VRChat 用に書き出し…</strong> で Unity プロジェクトの <code>Assets</code> フォルダーを選ぶと、<code>PSD3DPaint_VRC</code> フォルダーができます。</li>
+            <li>Unity でアバターの Rig を <strong>Humanoid</strong> にして、<strong>Tools ＞ PSD 3D Paint ＞ VRC ロコモーションを作成</strong> を実行。アニメーションと Animator Controller が作られ、VRChat SDK があれば Playable Layers の Base に自動で設定されます。</li>
+          </ol>
+          <div class="tip">スクリプトを使わずに済ませたいときは、<strong>Humanoid .anim でまとめて書き出し…</strong> で全スロットをマッスル値の <code>.anim</code> として書き出せます。</div>
+        </section>
+
+        <section id="unity">
+          <h2>Unity へ書き出し</h2>
+          <p>上のバーの <strong>Humanoid .anim で書き出し…</strong>、または「キーフレーム・書き出し」タブから書き出します。</p>
+          <ul>
+            <li><strong>ヒューマノイド（マッスル）</strong>: Unity の Humanoid と同じマッスル値（95 本のカーブ＋ルート）の <code>.anim</code>。Rig が Humanoid なら、<strong>別のアバターにもそのまま</strong> 使えます。Unity 2022.3 で検証済みです。</li>
+            <li><strong>このモデル専用</strong>: ボーンの回転をそのまま記録する Generic の <code>.anim</code>。</li>
+          </ul>
+          <p>モデルは T ポーズで作られたものがおすすめです。</p>
+        </section>
+
+        <section id="layout">
+          <h2>レイアウト</h2>
+          <div class="inline-shots">
+            <figure class="shot" style="flex:0 1 360px"><img src="images/window-menu.webp" width="410" height="395" loading="lazy" alt="ウィンドウメニュー" /></figure>
+            <div style="flex:2 1 320px">
+              <p>パネル・タブ・ツール列は、Unity のように左・右・下のドックや浮動ウィンドウへ自由に動かせます。</p>
+              <ul>
+                <li>タブの見出しをドラッグ: 並べ替え、別のタブ帯へ移動、ビューの上で離すと浮動ウィンドウ。</li>
+                <li>右上の <strong>レイアウト ▾</strong>（または ウィンドウ ＞ レイアウト）: 標準 / ワイド / コンパクト / 左にまとめる / ツールを浮動ウィンドウに のプリセット。</li>
+                <li>「現在のレイアウトを保存…」で名前を付けて保存。JSON に書き出して別の PC へ持っていけます。</li>
+                <li>迷ったら <strong>ウィンドウ ＞ このワークスペースの配置をリセット</strong>。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="perf">
+          <h2>軽量表示</h2>
+          <p>右下の <strong>表示: 自動</strong> を押すと、<strong>自動 → 軽量 → 高画質</strong> を切り替えられます。自動では、15 万ポリゴンを超えるモデルや低スペックの PC で軽量表示になります。視点を動かしている間・塗っている間・アニメ再生中だけ解像度を下げ、止めるとすぐ高画質に戻ります。</p>
+          <p>FBX のシェイプキー（表情など）は既定で読み込みません。読み込みが数倍速くなります。必要なら <strong>環境設定 ＞ 一般</strong> で読み込むようにできます。</p>
+        </section>
+
+        <section id="save">
+          <h2>保存と書き出し</h2>
+          <table>
+            <thead><tr><th>やりたいこと</th><th>操作</th></tr></thead>
+            <tbody>
+              <tr><td>作業を保存（あとで続きから）</td><td><kbd>Ctrl</kbd>+<kbd>S</kbd> でプロジェクト <code>.p3dp</code>。レイヤー・モデル・マテリアル・アニメーションまで全部入ります。</td></tr>
+              <tr><td>Photoshop / CLIP STUDIO で開く</td><td><strong>PSD を書き出す</strong>（<kbd>Ctrl</kbd>+<kbd>E</kbd>）。レイヤー構造・不透明度・描画モードを保持。</td></tr>
+              <tr><td>テクスチャ画像として使う</td><td><strong>PNG / JPEG / WebP を書き出す</strong>（統合）</td></tr>
+              <tr><td>ノーマルマップ</td><td><strong>法線 PNG を書き出す</strong></td></tr>
+            </tbody>
+          </table>
+          <p>作業内容は自動保存もされます。アプリが落ちても、次に起動したときに復元できます。</p>
+        </section>
+
+        <section id="update">
+          <h2>アップデート</h2>
+          <p>新しいバージョンは自動でダウンロードされます。ウィンドウ上部に出るバーの <strong>再起動して更新</strong> を押すだけです。</p>
+          <figure class="shot"><img src="images/update-banner.webp" width="1600" height="211" loading="lazy" alt="更新バー" /></figure>
+          <p>手動で確認するには <strong>ヘルプ ＞ 更新を確認…</strong>。</p>
+        </section>
+
+        <section id="keys">
+          <h2>ショートカット</h2>
+          <p>すべて <strong>環境設定 ＞ ショートカット</strong>（<kbd>Ctrl</kbd>+<kbd>,</kbd>）で変更できます。以下は初期値です。アプリ内では <kbd>F1</kbd> で一覧を開けます。</p>
+          <figure class="shot mid"><img src="images/shortcuts.webp" width="840" height="875" loading="lazy" alt="環境設定のショートカット画面" /></figure>
+          <h3>ファイル・編集</h3>
+          <table class="keys"><tbody>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>N</kbd></td><td>新規テクスチャ</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>O</kbd> / <kbd>Ctrl</kbd>+<kbd>S</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td><td>プロジェクトを開く / 保存 / 名前を付けて保存</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>E</kbd></td><td>PSD を書き出す</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>（<kbd>Ctrl</kbd>+<kbd>Y</kbd>）</td><td>元に戻す / やり直し</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>F</kbd></td><td>直前のフィルターを繰り返す</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>1</kbd> / <kbd>Ctrl</kbd>+<kbd>2</kbd></td><td>ペイント / アニメーション ワークスペース</td></tr>
+          </tbody></table>
+          <h3>ツール</h3>
+          <table class="keys"><tbody>
+            <tr><td><kbd>B</kbd> / <kbd>N</kbd> / <kbd>A</kbd> / <kbd>E</kbd></td><td>ブラシ / 鉛筆 / エアブラシ / 消しゴム</td></tr>
+            <tr><td><kbd>S</kbd> / <kbd>R</kbd></td><td>にじみ / ぼかし</td></tr>
+            <tr><td><kbd>G</kbd> / <kbd>Shift</kbd>+<kbd>G</kbd></td><td>塗りつぶし / グラデーション</td></tr>
+            <tr><td><kbd>T</kbd> / <kbd>Ctrl</kbd>+<kbd>T</kbd></td><td>テクスチャブラシ / 変形</td></tr>
+            <tr><td><kbd>K</kbd> / <kbd>J</kbd></td><td>クローン / 修復</td></tr>
+            <tr><td><kbd>O</kbd> / <kbd>Shift</kbd>+<kbd>O</kbd></td><td>覆い焼き / 焼き込み</td></tr>
+            <tr><td><kbd>I</kbd></td><td>スポイト</td></tr>
+            <tr><td><kbd>M</kbd> / <kbd>L</kbd> / <kbd>U</kbd></td><td>矩形選択 / なげなわ選択 / ファジー選択</td></tr>
+            <tr><td><kbd>[</kbd> / <kbd>]</kbd></td><td>ブラシを小さく / 大きく</td></tr>
+          </tbody></table>
+          <h3>表示・その他</h3>
+          <table class="keys"><tbody>
+            <tr><td><kbd>/</kbd> / <kbd>Shift</kbd>+<kbd>H</kbd> / <kbd>H</kbd> / <kbd>Alt</kbd>+<kbd>H</kbd></td><td>メッシュだけ表示 / パーツだけ表示 / パーツを隠す / すべて表示</td></tr>
+            <tr><td><kbd>Shift</kbd>+<kbd>Delete</kbd></td><td>レイヤー / グループを削除</td></tr>
+            <tr><td><kbd>Tab</kbd></td><td>カラー ⇔ 法線（凹凸）</td></tr>
+            <tr><td><kbd>Q</kbd></td><td>クイックマスク</td></tr>
+            <tr><td><kbd>X</kbd> / <kbd>D</kbd></td><td>描画色と背景色を入れ替え / 初期化</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>A</kbd> / <kbd>Ctrl</kbd>+<kbd>D</kbd> / <kbd>Ctrl</kbd>+<kbd>I</kbd></td><td>すべて選択 / 選択解除 / 選択範囲を反転</td></tr>
+            <tr><td><kbd>Shift</kbd>+<kbd>Z</kbd></td><td>シェーディング（ソリッド / ワイヤー）切り替え</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd></td><td>新しいタブ / 新しいウィンドウ</td></tr>
+            <tr><td><kbd>F1</kbd></td><td>ショートカット一覧</td></tr>
+          </tbody></table>
+          <h3>アニメーション</h3>
+          <table class="keys"><tbody>
+            <tr><td><kbd>W</kbd> / <kbd>E</kbd> / <kbd>R</kbd></td><td>移動 / 回転 / 拡縮</td></tr>
+            <tr><td><kbd>K</kbd></td><td>キーを追加</td></tr>
+            <tr><td><kbd>Space</kbd></td><td>再生 / 停止</td></tr>
+            <tr><td><kbd>,</kbd> / <kbd>.</kbd></td><td>前 / 次のキーへ</td></tr>
+            <tr><td><kbd>M</kbd></td><td>左右反転</td></tr>
+          </tbody></table>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+          <p style="margin:10px 0 0;max-width:340px">3D モデルに直接ペイントできる Windows 用アプリ。</p>
+        </div>
+        <div><h4>サイト</h4><ul><li><a href="download.html">ダウンロード</a></li><li><a href="guide.html">使い方</a></li><li><a href="plugins.html">プラグイン</a></li><li><a href="faq.html">よくある質問</a></li></ul></div>
+        <div><h4>GitHub</h4><ul><li><a class="gh-link" data-gh="repo">配布ページ（GitHub）</a></li><li><a class="gh-link" data-gh="releases">リリース一覧</a></li><li><a class="gh-link" data-gh="issues">不具合の報告・要望</a></li></ul></div>
+      </div>
+      <p class="fine">MIT License. three.js など同梱ソフトウェアはそれぞれのライセンスに従います。</p>
+    </div>
+  </footer>
+  <script src="assets/config.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>プラグイン — PSD 3D Paint</title>
+  <meta name="description" content="PSD 3D Paint の Python プラグイン。導入方法、同梱プラグイン、作り方（psdpaint SDK のリファレンス）、配布方法。" />
+  <meta property="og:title" content="プラグイン — PSD 3D Paint" />
+  <meta property="og:image" content="images/og.jpg" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+      <button class="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+      <nav class="nav">
+        <a href="index.html">トップ</a>
+        <a href="guide.html">使い方</a>
+        <a href="plugins.html" class="active">プラグイン</a>
+        <a href="faq.html">よくある質問</a>
+        <a class="btn primary" href="download.html">ダウンロード</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="page-head">
+      <h1>Python プラグイン</h1>
+      <p><code>.py</code> ファイルを 1 つ置くだけで、フィルターメニューに機能を追加できます。レイヤーの画素を読み書きしたり、AO・影・法線をベイクしたりできます。</p>
+    </div>
+
+    <div class="docs">
+      <aside class="toc" aria-label="目次">
+        <p class="toc-title">使う</p>
+        <ol>
+          <li><a href="#install">導入する</a></li>
+          <li><a href="#bundled">同梱プラグイン</a></li>
+        </ol>
+        <p class="toc-title" style="margin-top:18px">作る</p>
+        <ol>
+          <li><a href="#hello">いちばん小さい例</a></li>
+          <li><a href="#register">register()</a></li>
+          <li><a href="#params">パラメータ</a></li>
+          <li><a href="#api">API リファレンス</a></li>
+          <li><a href="#example">実例</a></li>
+          <li><a href="#test">テストとデバッグ</a></li>
+          <li><a href="#share">配布・共有</a></li>
+          <li><a href="#how">しくみ</a></li>
+          <li><a href="#limits">制限</a></li>
+        </ol>
+      </aside>
+
+      <article class="content">
+        <section id="install">
+          <h2>導入する</h2>
+          <div class="inline-shots">
+            <figure class="shot" style="flex:1 1 420px"><img src="images/plugin-settings.webp" width="840" height="591" loading="lazy" alt="環境設定のプラグインタブ。導入済みのプラグイン一覧と、ファイルから導入・フォルダ・再読込・Python設定ボタン" /></figure>
+            <div style="flex:1 1 300px">
+              <ol>
+                <li><strong>Python 3</strong> を入れます（<a href="https://www.python.org/downloads/windows/" rel="noopener">python.org</a>）。画像処理をするプラグインには <code>pip install numpy</code> も必要です。</li>
+                <li><strong>環境設定 ＞ プラグイン</strong>（<kbd>Ctrl</kbd>+<kbd>,</kbd>）で <strong>ファイルから導入…</strong> を押し、<code>.py</code> か <code>.zip</code> を選びます。</li>
+                <li><strong>フィルター</strong> メニューに項目が増えます。</li>
+              </ol>
+              <p>ファイルを直接置く場合は <code>%APPDATA%\PSD 3D Paint\plugins\</code>（<strong>フィルター ＞ プラグインフォルダを開く</strong>）へ入れて <strong>再読込</strong>。</p>
+              <p>Python が見つからないときは <strong>Python設定</strong> で <code>python.exe</code> の場所を指定します。未設定なら <code>py</code> / <code>python3</code> / <code>python</code> を自動で探します。</p>
+            </div>
+          </div>
+          <p>チェックを外すと一時的に無効にでき、自分で導入したものはゴミ箱ボタンで削除できます。</p>
+        </section>
+
+        <section id="bundled">
+          <h2>同梱プラグイン</h2>
+          <p>アプリには次のプラグインが最初から入っています。作るときのお手本にもなります。</p>
+          <div class="grid c2">
+            <div class="card"><h3>色を反転</h3><p><code>invert.py</code> — フィルター ＞ 色。numpy 不要。</p></div>
+            <div class="card"><h3>明るさ・コントラスト…</h3><p><code>brightness_contrast.py</code> — フィルター ＞ 色。パラメータのダイアログ付き。</p></div>
+            <div class="card"><h3>ガウスぼかし…</h3><p><code>gaussian_blur.py</code> — フィルター ＞ ぼかし。</p></div>
+            <div class="card"><h3>AO をベイクして合成</h3><p><code>bake_and_flatten.py</code> — フィルター ＞ 3D。AO を焼いて乗算で重ねます。</p></div>
+            <div class="card"><h3>こんにちは（情報表示）</h3><p><code>hello_world.py</code> — フィルター ＞ Python ＞ 例。いちばん小さい例。</p></div>
+          </div>
+          <figure class="shot narrow" style="margin-top:24px"><img src="images/filter-menu.webp" width="440" height="820" loading="lazy" alt="フィルターメニュー。下半分に Python / ぼかし / 色 / 3D のプラグイン項目" /><figcaption>プラグインはフィルターメニューの下半分に並びます。</figcaption></figure>
+        </section>
+
+        <section id="hello">
+          <h2>いちばん小さい例</h2>
+<pre><code>import psdpaint
+
+def run():
+    d = psdpaint.doc()
+    psdpaint.message(f"こんにちは。キャンバスは {d['width']}x{d['height']} です")
+
+psdpaint.register("hello", "こんにちは", run, menu="フィルター/Python/例")
+psdpaint.run()</code></pre>
+          <ul>
+            <li><code>register(...)</code> でメニュー項目を宣言し、</li>
+            <li>最後に <strong>必ず <code>psdpaint.run()</code></strong> を呼びます（ここからアプリとの通信が始まります）。</li>
+          </ul>
+          <p>ひな形は <a href="files/plugin-template.py" download>plugin-template.py</a> からダウンロードできます。コピーして書き換えるのがいちばん早いです。</p>
+        </section>
+
+        <section id="register">
+          <h2>register()</h2>
+<pre><code>psdpaint.register(proc, label, func, menu="フィルター/Python", params=None, help="")</code></pre>
+          <table>
+            <thead><tr><th>引数</th><th>意味</th></tr></thead>
+            <tbody>
+              <tr><td><code>proc</code></td><td>プラグイン内で一意な ID（例 <code>"my_blur"</code>）</td></tr>
+              <tr><td><code>label</code></td><td>メニューに出る名前</td></tr>
+              <tr><td><code>func</code></td><td>引数なしの関数。メニューで選ばれると呼ばれます</td></tr>
+              <tr><td><code>menu</code></td><td><code>/</code> 区切りのメニューの場所。<code>"フィルター/色"</code>、<code>"フィルター/Python/自作"</code> など</td></tr>
+              <tr><td><code>params</code></td><td>パラメータの宣言（下記）。無ければ確認なしで即実行</td></tr>
+              <tr><td><code>help</code></td><td>ダイアログに出す補足</td></tr>
+            </tbody>
+          </table>
+          <p>1 つの <code>.py</code> で <code>register()</code> を何回でも呼べます（複数のメニュー項目を持つプラグイン）。</p>
+        </section>
+
+        <section id="params">
+          <h2>パラメータ</h2>
+          <p><code>params</code> を書くと、実行前にアプリが自動でダイアログを出します。値は <code>psdpaint.param(name, default)</code> で受け取ります。</p>
+<pre><code>params=[
+    {"name": "amount", "label": "強さ",       "type": "int",    "default": 50, "min": 0, "max": 100},
+    {"name": "soft",   "label": "やわらかく", "type": "bool",   "default": True},
+    {"name": "mode",   "label": "モード",     "type": "choice", "default": "A", "choices": ["A", "B", "C"]},
+    {"name": "tint",   "label": "色",         "type": "color",  "default": "#ffffff"},
+]</code></pre>
+          <p><code>type</code> は <code>int</code> / <code>float</code> / <code>bool</code> / <code>string</code> / <code>color</code>（<code>#rrggbb</code>）/ <code>choice</code>（<code>choices</code> を併記）。</p>
+        </section>
+
+        <section id="api">
+          <h2>API リファレンス（<code>psdpaint</code>）</h2>
+          <h3>ドキュメントとレイヤー</h3>
+          <table>
+            <thead><tr><th>関数</th><th>説明</th></tr></thead>
+            <tbody>
+              <tr><td><code>doc()</code></td><td><code>{width, height, layerCount, activeIndex, normalWidth, normalHeight}</code></td></tr>
+              <tr><td><code>layers()</code></td><td><code>[{id, name, index, opacity, visible, blendMode}, ...]</code>（下から上）</td></tr>
+              <tr><td><code>active_layer()</code></td><td>アクティブなレイヤーの情報</td></tr>
+              <tr><td><code>new_layer(name="Python", above=True)</code></td><td>新しいレイヤーを作り <code>{id, index}</code> を返す</td></tr>
+              <tr><td><code>delete_layer(layer)</code></td><td>レイヤーを削除</td></tr>
+              <tr><td><code>set_layer(layer, **props)</code></td><td><code>name</code> / <code>opacity</code>（0〜1）/ <code>visible</code> / <code>blendMode</code> を変更</td></tr>
+              <tr><td><code>fill(layer, r, g, b, a=255)</code></td><td>単色で塗る</td></tr>
+            </tbody>
+          </table>
+          <p><code>layer</code> には <code>"active"</code> / <code>"composite"</code> / <code>"normal_map"</code> / <code>"normal_height"</code> / レイヤーの <code>id</code> を渡せます。</p>
+          <p><code>blendMode</code>: <code>normal, multiply, screen, overlay, darken, lighten, color-dodge, color-burn, hard-light, soft-light, difference, exclusion, hue, saturation, color, luminosity</code></p>
+
+          <h3>画素の読み書き</h3>
+<pre><code>img = psdpaint.get_image("active")      # psdpaint.Image（RGBA8）
+arr = img.to_numpy()                    # (H, W, 4) uint8  ※numpy が必要
+# ... arr を加工 ...
+psdpaint.set_image("active", psdpaint.Image.from_numpy(arr))</code></pre>
+          <ul>
+            <li><code>Image.data</code> は <code>width*height*4</code> バイトの <code>bytearray</code>。numpy なしでも直接いじれます。</li>
+            <li><code>from_numpy</code> はグレー（2D）・RGB・RGBA を受け付け、RGBA にそろえます。</li>
+            <li><code>set_image</code> の変更は、アプリ側で 1 手として <strong>取り消せます</strong>。サイズはキャンバスと同じにしてください。</li>
+          </ul>
+
+          <h3>ベイク</h3>
+<pre><code>res = psdpaint.bake("ao")            # "ao" | "light" | "objnormal"
+psdpaint.set_layer(res["layerId"], opacity=0.6, blendMode="multiply")</code></pre>
+
+          <h3>表示とパラメータ</h3>
+          <table>
+            <thead><tr><th>関数</th><th>説明</th></tr></thead>
+            <tbody>
+              <tr><td><code>message(text)</code></td><td>ステータスバーに 1 行表示</td></tr>
+              <tr><td><code>progress(frac, text="")</code></td><td>進み具合（0.0〜1.0）</td></tr>
+              <tr><td><code>log(*args)</code> / <code>print(...)</code></td><td>Python コンソールパネルに出力</td></tr>
+              <tr><td><code>param(name, default)</code></td><td>ダイアログで選ばれた値</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="example">
+          <h2>実例: 明るさ・コントラスト</h2>
+<pre><code>"""明るさ / コントラストをアクティブレイヤーに適用（numpy が必要）"""
+import psdpaint
+
+def run():
+    import numpy as np
+    bright   = psdpaint.param("brightness", 0)   # -100..100
+    contrast = psdpaint.param("contrast", 0)
+
+    img = psdpaint.get_image("active")
+    a = img.to_numpy().astype(np.float32)
+    rgb = a[:, :, :3]
+    rgb += bright * 1.5
+    c = (contrast + 100) / 100.0
+    rgb = (rgb - 128.0) * c + 128.0
+    a[:, :, :3] = np.clip(rgb, 0, 255)
+
+    psdpaint.set_image("active", psdpaint.Image.from_numpy(a))
+    psdpaint.message("明るさ / コントラストを適用")
+
+psdpaint.register(
+    "brightness_contrast", "明るさ・コントラスト…", run,
+    menu="フィルター/色",
+    params=[
+        {"name": "brightness", "label": "明るさ",       "type": "int", "default": 0, "min": -100, "max": 100},
+        {"name": "contrast",   "label": "コントラスト", "type": "int", "default": 0, "min": -100, "max": 100},
+    ],
+)
+psdpaint.run()</code></pre>
+        </section>
+
+        <section id="test">
+          <h2>テストとデバッグ</h2>
+          <ol>
+            <li><code>.py</code> を <code>%APPDATA%\PSD 3D Paint\plugins\</code> に置きます（<strong>フィルター ＞ プラグインフォルダを開く</strong>）。</li>
+            <li><strong>環境設定 ＞ プラグイン ＞ 再読込</strong>（または <strong>フィルター ＞ プラグインを再読み込み</strong>）。</li>
+            <li>フィルターメニューから実行します。エラーは <strong>Python コンソール</strong> パネルにトレース付きで出ます。<code>print()</code> もここに出ます。</li>
+          </ol>
+          <div class="tip">時間のかかる処理では <code>progress()</code> を呼んでください。アプリは結果を待っている間、操作を受け付けません。</div>
+        </section>
+
+        <section id="share">
+          <h2>配布・共有</h2>
+          <ul>
+            <li>1 ファイルなら <code>.py</code> をそのまま渡せます。</li>
+            <li>複数ファイル（サブモジュールやデータ入り）は <strong><code>.zip</code></strong> にまとめます。<strong>ファイルから導入…</strong> で選ぶと <code>plugins/&lt;zip 名&gt;/</code> に展開されます。zip の中に <code>register</code> を呼ぶ <code>&lt;名前&gt;.py</code> を 1 つ入れてください。</li>
+            <li>みんなに使ってもらいたいときは、<code>.py</code>（または <code>.zip</code>）と、何をするか・使い方・必要な依存を書いた説明を添えて、<a class="gh-link" data-gh="issues">GitHub の Issues</a> から送ってください。特に書かなければ本体と同じ MIT ライセンスとして扱います。</li>
+          </ul>
+        </section>
+
+        <section id="how">
+          <h2>しくみ</h2>
+          <p>アプリはプラグインを 2 通りに起動します。</p>
+          <ol>
+            <li><strong>登録</strong>（<code>PSDPAINT_MODE=register</code>）: <code>psdpaint.run()</code> が登録内容を JSON で 1 行返してすぐ終了。アプリはこれでメニューを作ります。</li>
+            <li><strong>実行</strong>（<code>PSDPAINT_MODE=execute</code>, <code>PSDPAINT_PROC=&lt;proc&gt;</code>）: メニューで選ばれたときに起動。<code>get_image</code> などは改行区切りの JSON-RPC でアプリに問い合わせます。</li>
+          </ol>
+          <p><code>stdout</code> は通信専用に複製されているので、<code>print()</code> を使っても通信は壊れません。<code>import psdpaint</code> は常に通ります。</p>
+        </section>
+
+        <section id="limits">
+          <h2>制限（現時点）</h2>
+          <ul>
+            <li>できるのは、画像レイヤーと法線の高さバッファの読み書き、ベイクまでです。</li>
+            <li>3D モデルのボーン・アニメーション・カメラ・マテリアルにはまだアクセスできません。</li>
+            <li>スクリプト言語は Python のみです。</li>
+          </ul>
+          <p>詳しい資料: <a href="files/PLUGINS.txt">PLUGINS.md（作り方）</a> / <a href="files/plugins-README.txt">plugins/README.md（API 一覧）</a></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+          <p style="margin:10px 0 0;max-width:340px">3D モデルに直接ペイントできる Windows 用アプリ。</p>
+        </div>
+        <div><h4>サイト</h4><ul><li><a href="download.html">ダウンロード</a></li><li><a href="guide.html">使い方</a></li><li><a href="plugins.html">プラグイン</a></li><li><a href="faq.html">よくある質問</a></li></ul></div>
+        <div><h4>GitHub</h4><ul><li><a class="gh-link" data-gh="repo">配布ページ（GitHub）</a></li><li><a class="gh-link" data-gh="releases">リリース一覧</a></li><li><a class="gh-link" data-gh="issues">不具合の報告・要望</a></li></ul></div>
+      </div>
+      <p class="fine">MIT License. three.js など同梱ソフトウェアはそれぞれのライセンスに従います。</p>
+    </div>
+  </footer>
+  <script src="assets/config.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>

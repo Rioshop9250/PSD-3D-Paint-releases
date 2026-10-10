@@ -1,0 +1,189 @@
+# アドオン（Python プラグイン）の作り方
+
+PSD 3D Paint は **Python スクリプト**でフィルター機能を追加できます。`.py` を 1 つ置くだけで
+**フィルターメニュー**に項目が増え、レイヤーの画素を読み書きしたり、AO / 影 / 法線をベイクしたりできます。
+
+- 言語: Python 3（外部で用意。アプリには同梱していません）
+- 依存: 標準ライブラリのみで動きます。画像処理をするなら `numpy` を入れると便利です。
+- 置き場所: `%APPDATA%\PSD 3D Paint\plugins\`（**環境設定 → プラグイン → フォルダーを開く** で開けます）
+
+---
+
+## 1. いちばん小さいアドオン
+
+`plugins/hello_world.py` 相当:
+
+```python
+import psdpaint
+
+def run():
+    d = psdpaint.doc()
+    psdpaint.message(f"こんにちは。キャンバスは {d['width']}x{d['height']} です")
+
+psdpaint.register("hello", "こんにちは", run, menu="フィルター/Python/例")
+psdpaint.run()
+```
+
+- `register(...)` で**メニュー項目**を宣言し、
+- 最後に **必ず `psdpaint.run()`** を呼びます（これがホストとの通信を開始します）。
+- ファイルを保存したら、アプリの **環境設定 → プラグイン → 再読込**（またはアプリ再起動）で反映されます。
+
+---
+
+## 2. `register()` の引数
+
+```python
+psdpaint.register(proc, label, func, menu="フィルター/Python", params=None, help="")
+```
+
+| 引数 | 意味 |
+| --- | --- |
+| `proc` | プラグイン内で一意の ID 文字列（例 `"my_blur"`）。 |
+| `label` | メニューに出る表示名。 |
+| `func` | 引数なしの関数。ユーザーが項目を選ぶと呼ばれます。 |
+| `menu` | `"/"` 区切りのメニューパス。`"フィルター/色"` や `"フィルター/Python/自作"` など。 |
+| `params` | パラメータ宣言のリスト（下記）。空なら確認ダイアログ無しで即実行。 |
+| `help` | 補足文（ダイアログに表示）。 |
+
+1 つの `.py` から `register()` を**複数回**呼べば、複数のメニュー項目を持つアドオンになります。
+
+### パラメータ宣言
+
+```python
+params=[
+    {"name": "amount", "label": "強さ", "type": "int",   "default": 50, "min": 0, "max": 100},
+    {"name": "soft",   "label": "やわらかく", "type": "bool", "default": True},
+    {"name": "mode",   "label": "モード", "type": "choice", "default": "A", "choices": ["A", "B", "C"]},
+    {"name": "tint",   "label": "色",   "type": "color", "default": "#ffffff"},
+]
+```
+
+`type`: `int` / `float` / `bool` / `string` / `color` / `choice`。パラメータがあるとホストが**自動でダイアログ**を出し、
+`func` の中で `psdpaint.param("amount", 50)` として値を受け取ります。
+
+---
+
+## 3. `psdpaint` SDK API
+
+### ドキュメント / レイヤー
+
+| 関数 | 返り値・説明 |
+| --- | --- |
+| `doc()` | `{width, height, layerCount, activeIndex, normalWidth, normalHeight}` |
+| `layers()` | `[{id, name, index, opacity, visible, blendMode}, ...]`（下→上） |
+| `active_layer()` | アクティブレイヤーの情報 |
+| `new_layer(name="Python", above=True)` | `{id, index}` を返す |
+| `delete_layer(layer)` | レイヤー削除 |
+| `set_layer(layer, **props)` | `name` / `opacity`(0..1) / `visible` / `blendMode` を変更 |
+| `fill(layer, r, g, b, a=255)` | 単色で塗る |
+
+`layer` 引数はどれも `"active"` / `"composite"` / `"normal_map"` / `"normal_height"` / レイヤー `id` を受け付けます。
+
+### 画素の読み書き
+
+```python
+img = psdpaint.get_image("active")      # psdpaint.Image (RGBA8)
+arr = img.to_numpy()                    # (H, W, 4) uint8  ※numpy 必須
+# ...arr を加工...
+psdpaint.set_image("active", psdpaint.Image.from_numpy(arr))
+```
+
+- `Image.data` は `width*height*4` バイトの `bytearray`。numpy 無しでも直接いじれます。
+- `from_numpy` は 2D（グレー）・3ch（RGB）・4ch（RGBA）を受け付け、自動で RGBA に整えます。
+- `set_image` による変更は**アプリ側で 1 手として取り消し可能**です。
+
+### ベイク
+
+```python
+res = psdpaint.bake("ao")            # kind: "ao" | "light" | "objnormal"
+psdpaint.set_layer(res["layerId"], opacity=0.6, blendMode="multiply")
+```
+
+### ユーザーへの表示
+
+| 関数 | 用途 |
+| --- | --- |
+| `message(text)` | ステータスバーに 1 行表示 |
+| `progress(frac, text="")` | 進捗バー（`frac` は 0.0〜1.0） |
+| `log(*args)` / `print(...)` | Python コンソールパネルに出力（`print` も自動でそこへ流れます） |
+
+---
+
+## 4. 実例（明るさ・コントラスト）
+
+```python
+"""明るさ / コントラストを active レイヤーに適用（numpy 必須）。"""
+import psdpaint
+
+def run():
+    import numpy as np
+    bright   = psdpaint.param("brightness", 0)   # -100..100
+    contrast = psdpaint.param("contrast", 0)
+
+    img = psdpaint.get_image("active")
+    a = img.to_numpy().astype(np.float32)
+    rgb = a[:, :, :3]
+    rgb += bright * 1.5
+    c = (contrast + 100) / 100.0
+    rgb = (rgb - 128.0) * c + 128.0
+    a[:, :, :3] = np.clip(rgb, 0, 255)
+
+    psdpaint.set_image("active", psdpaint.Image.from_numpy(a))
+    psdpaint.message("明るさ / コントラストを適用")
+
+psdpaint.register(
+    "brightness_contrast", "明るさ・コントラスト…", run,
+    menu="フィルター/色",
+    params=[
+        {"name": "brightness", "label": "明るさ",       "type": "int", "default": 0, "min": -100, "max": 100},
+        {"name": "contrast",   "label": "コントラスト", "type": "int", "default": 0, "min": -100, "max": 100},
+    ],
+)
+psdpaint.run()
+```
+
+同梱の他の例: `plugins/invert.py`（numpy 不要）、`plugins/gaussian_blur.py`、`plugins/bake_and_flatten.py`。
+
+---
+
+## 5. しくみ（プロトコル）
+
+ホストはプラグインを 2 回起動します。
+
+1. **register モード**（`PSDPAINT_MODE=register`）: `psdpaint.run()` が登録内容の manifest を JSON で 1 行返して即終了。
+   ホストはこれでメニューを組み立てます。
+2. **execute モード**（`PSDPAINT_MODE=execute`, `PSDPAINT_PROC=<proc>`）: ユーザーが項目を選んだときに起動。
+   `func` が実行され、`get_image` / `set_image` などは**改行区切り JSON-RPC**でホストへ問い合わせます。
+
+`stdout` はプロトコル専用に複製されているので、`print()` は壊れずコンソールへ回されます。
+`PYTHONPATH` に同梱ディレクトリとユーザーディレクトリが入るので `import psdpaint` は常に通ります。
+
+---
+
+## 6. テストと配布
+
+### テスト
+
+1. `.py` を `%APPDATA%\PSD 3D Paint\plugins\` に置く（またはリポジトリの `plugins/` で開発）
+2. **環境設定 → プラグイン → 再読込**
+3. フィルターメニューから実行。エラーは Python コンソールパネルにトレース付きで出ます。
+
+Python が見つからない場合は **環境設定 → プラグイン → Python の場所を指定**。
+
+### 配布（.zip アドオン）
+
+- 単一ファイルなら `.py` をそのまま渡します。
+- 複数ファイル（サブモジュール・データ同梱）なら **`.zip`** にまとめます。ユーザーは
+  **環境設定 → プラグイン → ファイルから導入…** で `.zip` を選ぶと `plugins/<zip名>/` に展開されます。
+  zip の中に `<name>.py`（`register` を呼ぶエントリ）を 1 つ入れてください。
+
+配布用テンプレートと、コミュニティ向けの置き場所は [`../contrib/README.md`](../contrib/README.md) を参照してください。
+
+---
+
+## 7. 制限（現時点）
+
+- プラグインからできるのは **画像レイヤー / 法線ハイトバッファの読み書き** と **ベイク** までです。
+- 3D モデルのボーン・アニメーション・カメラ・マテリアルへのアクセスはまだありません。
+- スクリプト言語は Python のみ（Script-Fu 相当の内蔵言語はありません）。
+- 長時間かかる処理は `progress()` を呼んでください（ホストは応答待ちの間フリーズします）。

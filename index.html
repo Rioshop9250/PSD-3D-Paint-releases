@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PSD 3D Paint — 3D モデルに直接ペイント</title>
+  <meta name="description" content="PSD 3D Paint は 3D モデルにテクスチャを直接塗れる無料の Windows アプリ。レイヤー・PSD 対応、アニメーション作成、VRChat ロコモーション、Unity Humanoid .anim 書き出し、Python プラグイン。" />
+  <meta property="og:title" content="PSD 3D Paint — 3D モデルに直接ペイント" />
+  <meta property="og:description" content="3D モデルに直接塗れる。レイヤー・PSD・アニメーション・VRChat・Unity 対応の無料ペイントアプリ。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+      <button class="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+      <nav class="nav">
+        <a href="index.html" class="active">トップ</a>
+        <a href="guide.html">使い方</a>
+        <a href="plugins.html">プラグイン</a>
+        <a href="faq.html">よくある質問</a>
+        <a class="btn primary" href="download.html">ダウンロード</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Windows 用 無料 3D ペイントアプリ</p>
+        <h1>3D モデルに、<span class="grad">そのまま描く。</span></h1>
+        <p class="lead">
+          PSD 3D Paint は、3D モデルの表面に直接ブラシで色を塗れるペイントアプリです。
+          Photoshop のようなレイヤー、PSD の読み書き、アニメーション作成、VRChat 用ロコモーション、
+          Unity Humanoid の <code>.anim</code> 書き出しまで、ひとつのアプリでこなせます。
+        </p>
+        <div class="btn-row">
+          <a class="btn primary big" href="download.html">無料ダウンロード</a>
+          <a class="btn big" href="guide.html">使い方を見る</a>
+        </div>
+        <p class="meta">Windows 10 / 11（64bit）・インストール不要のポータブル版あり・自動アップデート対応</p>
+        <div class="hero-shot shot">
+          <img src="images/hero-paint.webp" width="1600" height="904" alt="PSD 3D Paint のペイント画面。中央の 3D ビューにグラデーションと模様が塗られた結び目の形のモデル、左にカラーパネル、右にレイヤーパネル。" />
+        </div>
+      </div>
+    </section>
+
+    <section class="block alt">
+      <div class="wrap">
+        <p class="eyebrow">Features</p>
+        <h2 class="title">できること</h2>
+        <p class="sub">テクスチャを描くための道具と、モデルを動かすための道具がそろっています。</p>
+        <div class="grid c3">
+          <div class="card"><div class="ico">🖌</div><h3>3D に直接ペイント</h3><p>ブラシ・鉛筆・エアブラシ・消しゴム・にじみ・クローンなど。UV の継ぎ目をまたいでも、そのまま塗れます。</p></div>
+          <div class="card"><div class="ico">🗂</div><h3>レイヤーと PSD</h3><p>グループ・マスク・クリッピング・調整レイヤー・16 種の描画モード。PSD の読み込みと書き出しに対応。</p></div>
+          <div class="card"><div class="ico">🧊</div><h3>FBX / glTF / OBJ</h3><p>複数メッシュ・マテリアルもそのまま。テクスチャは名前から自動で割り当て、透過テクスチャも表示。</p></div>
+          <div class="card"><div class="ico">🏃</div><h3>アニメーション</h3><p>コントローラーでポーズを付けてキーを打つだけ。歩き・走りなどのひな形からすぐ作れます。</p></div>
+          <div class="card"><div class="ico">🎮</div><h3>VRChat・Unity</h3><p>ロコモーション 19 種を一括作成。Humanoid のマッスル値 <code>.anim</code> で、別のアバターにもそのまま使えます。</p></div>
+          <div class="card"><div class="ico">🐍</div><h3>Python プラグイン</h3><p><code>.py</code> を置くだけでフィルターメニューに追加。numpy で画素を加工したり、AO をベイクしたり。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="wrap">
+        <div class="feature">
+          <div class="text">
+            <p class="eyebrow">Paint</p>
+            <h3>3D と 2D を並べて、同じ絵を描く</h3>
+            <p>3D ビューで塗った内容は、すぐ 2D（テクスチャ）ビューにも反映されます。細かい所は 2D で、形に沿った所は 3D で。どちらも同じレイヤー・同じ取り消し履歴を共有します。</p>
+            <ul>
+              <li>グラデーションは 3D の位置で塗れるので、UV の島をまたいでもきれいにつながる</li>
+              <li>凹凸（ノーマル）モードで、塗るだけで盛り上げ・彫り込み</li>
+              <li>AO・影・法線をテクスチャへベイク</li>
+            </ul>
+          </div>
+          <div class="shot"><img src="images/split-view.webp" width="1600" height="904" loading="lazy" alt="3D ビューと 2D テクスチャビューを並べて表示した画面" /></div>
+        </div>
+
+        <div class="feature rev">
+          <div class="text">
+            <p class="eyebrow">Focus</p>
+            <h3>見たいメッシュだけを表示して塗る</h3>
+            <p>カーソルを合わせて <kbd>/</kbd> を押すと、そのメッシュだけを表示します（Blender と同じ操作）。<kbd>Shift</kbd>+<kbd>H</kbd> でパーツだけ、<kbd>H</kbd> でパーツを隠す。服の下や髪の内側など、ふだん見えない所も塗れます。</p>
+          </div>
+          <div class="shot"><img src="images/isolate-mesh.webp" width="1600" height="904" loading="lazy" alt="メッシュ「Body」だけを表示している 3D ビュー" /></div>
+        </div>
+
+        <div class="feature">
+          <div class="text">
+            <p class="eyebrow">Animate</p>
+            <h3>アニメーションも、このアプリで</h3>
+            <p>ヒューマノイドのモデルなら、コントローラーの自動セットアップから始められます。待機・歩き・走り・手を振るなどのひな形を選んで、手直ししてキーを打つだけ。<kbd>Ctrl</kbd>+<kbd>Z</kbd> で 1 手ずつ戻せます。</p>
+            <ul>
+              <li>VRChat ロコモーション 19 スロットをまとめて作成</li>
+              <li>Unity Humanoid（マッスル値）の <code>.anim</code> で書き出し</li>
+            </ul>
+          </div>
+          <div class="shot"><img src="images/anim-workspace.webp" width="1600" height="904" loading="lazy" alt="アニメーション ワークスペース。人形のモデルが歩くポーズで、下にキーフレームのタイムライン" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block alt">
+      <div class="wrap">
+        <p class="eyebrow">Get started</p>
+        <h2 class="title">3 ステップではじめる</h2>
+        <div class="steps">
+          <div class="card"><h3>ダウンロードして起動</h3><p>インストーラー版をダブルクリック。ポータブル版ならそのまま起動できます。</p></div>
+          <div class="card"><h3>3D モデルを開く</h3><p>スタート画面の「3D モデルを開く」から <code>.fbx</code> / <code>.glb</code> などを選択。テクスチャも自動で取り込めます。</p></div>
+          <div class="card"><h3>モデルの上で塗る</h3><p>ブラシ（<kbd>B</kbd>）を選んで、モデルの表面をドラッグ。完成したら PSD や PNG で書き出します。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="wrap">
+        <div class="grid c2">
+          <div>
+            <p class="eyebrow">Formats</p>
+            <h2 class="title">対応ファイル</h2>
+            <p class="sub" style="margin-bottom:16px">読み込み</p>
+            <div class="tags">
+              <span class="tag">FBX</span><span class="tag">glTF / GLB</span><span class="tag">VRM</span><span class="tag">OBJ</span><span class="tag">STL / PLY（表示のみ）</span>
+              <span class="tag">PSD</span><span class="tag">PNG / JPEG / WebP / BMP</span><span class="tag">.p3dp（プロジェクト）</span>
+            </div>
+            <p class="sub" style="margin:22px 0 16px">書き出し</p>
+            <div class="tags">
+              <span class="tag">PSD（レイヤー保持）</span><span class="tag">PNG / JPEG / WebP</span><span class="tag">法線マップ PNG</span>
+              <span class="tag">Unity .anim（Humanoid / Generic）</span><span class="tag">VRChat ロコモーション一式</span>
+            </div>
+          </div>
+          <div>
+            <p class="eyebrow">Updates</p>
+            <h2 class="title">更新は自動で</h2>
+            <p class="sub">新しいバージョンが出ると、アプリが自動でダウンロードします。ウィンドウ上部の「再起動して更新」を押すだけ。アンインストールや再ダウンロードは要りません。</p>
+            <div class="shot"><img src="images/update-banner.webp" width="1600" height="211" loading="lazy" alt="「新しいバージョンの準備ができました」と表示された更新バー" /></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" style="padding-top:0">
+      <div class="wrap">
+        <div class="cta">
+          <h2>さっそく塗ってみよう</h2>
+          <p>無料で使えます。モデルが無くても、形状メニューの球や箱で試せます。</p>
+          <div class="btn-row">
+            <a class="btn primary big" href="download.html">ダウンロード</a>
+            <a class="btn big" href="guide.html">使い方</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+          <p style="margin:10px 0 0;max-width:340px">3D モデルに直接ペイントできる Windows 用アプリ。</p>
+        </div>
+        <div><h4>サイト</h4><ul><li><a href="download.html">ダウンロード</a></li><li><a href="guide.html">使い方</a></li><li><a href="plugins.html">プラグイン</a></li><li><a href="faq.html">よくある質問</a></li></ul></div>
+        <div><h4>GitHub</h4><ul><li><a class="gh-link" data-gh="repo">配布ページ（GitHub）</a></li><li><a class="gh-link" data-gh="releases">リリース一覧</a></li><li><a class="gh-link" data-gh="issues">不具合の報告・要望</a></li></ul></div>
+      </div>
+      <p class="fine">MIT License. three.js など同梱ソフトウェアはそれぞれのライセンスに従います。</p>
+    </div>
+  </footer>
+  <script src="assets/config.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>

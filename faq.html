@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>よくある質問 — PSD 3D Paint</title>
+  <meta name="description" content="PSD 3D Paint のよくある質問。起動時の警告、モデルが読み込めない、重い、透過、アップデート、VRChat など。" />
+  <meta property="og:title" content="よくある質問 — PSD 3D Paint" />
+  <meta property="og:image" content="images/og.jpg" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+      <button class="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
+      <nav class="nav">
+        <a href="index.html">トップ</a>
+        <a href="guide.html">使い方</a>
+        <a href="plugins.html">プラグイン</a>
+        <a href="faq.html" class="active">よくある質問</a>
+        <a class="btn primary" href="download.html">ダウンロード</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap" style="max-width:900px">
+    <div class="page-head">
+      <h1>よくある質問</h1>
+      <p>解決しないときは <a class="gh-link" data-gh="issues">GitHub の Issues</a> で知らせてください。</p>
+    </div>
+
+    <div style="padding:12px 0 80px">
+      <h2 class="faq-group">インストール・起動</h2>
+      <details class="qa"><summary>「Windows によって PC が保護されました」と出て起動できない</summary>
+        <div class="a"><p>コード署名をしていないため、Windows SmartScreen の警告が出ます。<strong>［詳細情報］→［実行］</strong> で起動できます。</p></div></details>
+      <details class="qa"><summary>インストーラー版とポータブル版、どちらを選べばいい？</summary>
+        <div class="a"><p>迷ったら <strong>インストーラー版</strong>。スタートメニューに登録され、更新も終了時に自動で適用されます。USB メモリで持ち歩きたい、インストールしたくない場合はポータブル版を選んでください。どちらも自動アップデートに対応しています。</p></div></details>
+      <details class="qa"><summary>無料ですか？</summary>
+        <div class="a"><p>無料です。</p></div></details>
+      <details class="qa"><summary>Mac や Linux で使えますか？</summary>
+        <div class="a"><p>いまは Windows 10 / 11（64bit）用だけです。</p></div></details>
+
+      <h2 class="faq-group">アップデート</h2>
+      <details class="qa"><summary>新しいバージョンにするには、アンインストールして入れ直す必要がありますか？</summary>
+        <div class="a"><p>いいえ。アプリが起動時と 6 時間ごとに新しいバージョンを確認し、自動でダウンロードします。ウィンドウ上部の <strong>再起動して更新</strong> を押すだけです。</p></div></details>
+      <details class="qa"><summary>自動で更新を確認してほしくない</summary>
+        <div class="a"><p><strong>ヘルプ ＞ 起動時に自動で更新を確認</strong> のチェックを外してください。<strong>ヘルプ ＞ 更新を確認…</strong> でいつでも手動で確認できます。</p></div></details>
+
+      <h2 class="faq-group">3D モデル</h2>
+      <details class="qa"><summary>どんなファイルを開けますか？</summary>
+        <div class="a"><p>FBX / glTF・GLB / VRM / OBJ / STL / PLY です。STL と PLY は UV を持たないので表示だけで、塗れません。<code>.gltf</code> は外部ファイル（<code>.bin</code> や画像）を参照していると読めないので、<code>.glb</code> で書き出してください。</p></div></details>
+      <details class="qa"><summary>モデルは開けたけど、テクスチャが付いていない</summary>
+        <div class="a"><p>モデルと同じフォルダー（または FBX フォルダーの親）にテクスチャ画像があれば、開いたときに割り当て画面が出ます。出なかった場合や選び直したい場合は <strong>ファイル ＞ モデルのテクスチャを取り込む</strong> を使ってください。<a href="guide.html#textures">詳しくはこちら</a>。</p></div></details>
+      <details class="qa"><summary>「UV が無い」と言われて塗れない</summary>
+        <div class="a"><p>UV 展開されていないメッシュは塗れません。Blender などで UV 展開してから <code>.glb</code> / <code>.fbx</code> で書き出してください。</p></div></details>
+      <details class="qa"><summary>モデルが見当たらない・位置がずれている</summary>
+        <div class="a"><p>テンキーの <kbd>.</kbd> で全体を表示します。読み込み時に中心を原点に合わせ、底面がグリッドに乗るように自動で配置しています。</p></div></details>
+      <details class="qa"><summary>髪の毛先やまつ毛が透けずに四角く見える</summary>
+        <div class="a"><p>マテリアルパネルの <strong>透過</strong> を「切り抜き」にしてみてください。既定の「自動」は、透明な画素があれば透かします。透過マスク（白 = 見える、黒 = 透明）を使うモデルは、テクスチャの取り込み画面でマスク画像も選んでください。</p></div></details>
+      <details class="qa"><summary>服の下や髪の内側が塗れない</summary>
+        <div class="a"><p>塗りたいメッシュにカーソルを合わせて <kbd>/</kbd>（そのメッシュだけ表示）や <kbd>Shift</kbd>+<kbd>H</kbd>（そのパーツだけ表示）を押してください。隠した部分は塗りの対象から外れます。<a href="guide.html#isolate">詳しくはこちら</a>。</p></div></details>
+      <details class="qa"><summary>表情（シェイプキー）が読み込まれない</summary>
+        <div class="a"><p>読み込みを速くするため、シェイプキーは既定で読み込みません。<strong>環境設定 ＞ 一般</strong> で読み込むようにできます。</p></div></details>
+
+      <h2 class="faq-group">動作・表示</h2>
+      <details class="qa"><summary>ノートパソコンだと重い</summary>
+        <div class="a"><p>右下の <strong>表示: 自動</strong> を押して <strong>軽量</strong> にしてください。視点を動かしている間や塗っている間だけ解像度を下げ、影と選択枠を省略します。それでも重いときは、キャンバスの解像度を下げる、環境設定で元に戻す段数を減らす、影を切る、を試してください。</p></div></details>
+      <details class="qa"><summary>パネルの配置がぐちゃぐちゃになった</summary>
+        <div class="a"><p><strong>ウィンドウ ＞ このワークスペースの配置をリセット</strong> で元に戻ります。右上の <strong>レイアウト ▾</strong> からプリセットも選べます。</p></div></details>
+      <details class="qa"><summary>ショートカットが効かない</summary>
+        <div class="a"><p>文字入力欄にカーソルがあると、キーは入力欄に入ります。3D ビューを一度クリックしてから押してください。キーの割り当ては <strong>環境設定 ＞ ショートカット</strong> で確認・変更できます。</p></div></details>
+      <details class="qa"><summary>設定を初期化したい</summary>
+        <div class="a"><p>アプリを終了して <code>%APPDATA%\PSD 3D Paint\</code> を削除してください。保存したプロジェクト（<code>.p3dp</code>）は別の場所にあるので消えません。</p></div></details>
+
+      <h2 class="faq-group">アニメーション・VRChat・Unity</h2>
+      <details class="qa"><summary>書き出した .anim を別のアバターでも使えますか？</summary>
+        <div class="a"><p><strong>ヒューマノイド（マッスル）</strong> 形式で書き出した <code>.anim</code> は、Rig が Humanoid のアバターならどれにでも使えます。<strong>このモデル専用</strong> 形式は、書き出したモデルにだけ使えます。</p></div></details>
+      <details class="qa"><summary>VRChat のロコモーションを差し替えたい</summary>
+        <div class="a"><p>アニメーションモードの <strong>VRC ロコモーション</strong> タブで 19 スロットを作り、<strong>VRChat 用に書き出し…</strong> で Unity プロジェクトの Assets を選びます。Unity で <strong>Tools ＞ PSD 3D Paint ＞ VRC ロコモーションを作成</strong> を実行すると、Animator Controller まで作られます。<a href="guide.html#vrc">詳しくはこちら</a>。</p></div></details>
+      <details class="qa"><summary>間違えてキーを消した</summary>
+        <div class="a"><p>アニメーションモードでも <kbd>Ctrl</kbd>+<kbd>Z</kbd> で戻せます（キーの追加・削除・移動、ポーズの変更など。最大 100 手）。</p></div></details>
+
+      <h2 class="faq-group">プラグイン</h2>
+      <details class="qa"><summary>プラグインが動かない・メニューに出ない</summary>
+        <div class="a"><p>Python 3 が必要です。<strong>環境設定 ＞ プラグイン</strong> に Python のバージョンが表示されているか確認し、見つからないときは <strong>Python設定</strong> で場所を指定してください。numpy を使うプラグインは <code>pip install numpy</code> も必要です。エラーは Python コンソールパネルに出ます。</p></div></details>
+      <details class="qa"><summary>自分でプラグインを作りたい</summary>
+        <div class="a"><p><a href="plugins.html#hello">プラグインの作り方</a> を見てください。<code>.py</code> を 1 つ書くだけで作れます。</p></div></details>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+          <p style="margin:10px 0 0;max-width:340px">3D モデルに直接ペイントできる Windows 用アプリ。</p>
+        </div>
+        <div><h4>サイト</h4><ul><li><a href="download.html">ダウンロード</a></li><li><a href="guide.html">使い方</a></li><li><a href="plugins.html">プラグイン</a></li><li><a href="faq.html">よくある質問</a></li></ul></div>
+        <div><h4>GitHub</h4><ul><li><a class="gh-link" data-gh="repo">配布ページ（GitHub）</a></li><li><a class="gh-link" data-gh="releases">リリース一覧</a></li><li><a class="gh-link" data-gh="issues">不具合の報告・要望</a></li></ul></div>
+      </div>
+      <p class="fine">MIT License. three.js など同梱ソフトウェアはそれぞれのライセンスに従います。</p>
+    </div>
+  </footer>
+  <script src="assets/config.js"></script>
+  <script src="assets/site.js"></script>
+</body>
+</html>
