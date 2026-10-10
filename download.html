@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ダウンロード — PSD 3D Paint</title>
-  <meta name="description" content="PSD 3D Paint の最新版をダウンロード。インストーラー版とポータブル版、どちらも自動アップデートに対応。" />
+  <meta name="description" content="PSD 3D Paint の最新版をダウンロード（Windows 10 / 11）。インストーラー版とポータブル版があります。" />
   <meta property="og:title" content="ダウンロード — PSD 3D Paint" />
   <meta property="og:image" content="images/og.jpg" />
   <link rel="icon" href="images/favicon.png" />
@@ -13,7 +13,7 @@
 <body>
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+      <a class="brand" href="index.html"><img data-img="icon" src="images/icon-256.png" alt="" />PSD 3D Paint</a>
       <button class="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
       <nav class="nav">
         <a href="index.html">トップ</a>
@@ -28,17 +28,17 @@
   <main class="wrap">
     <div class="page-head">
       <h1>ダウンロード</h1>
-      <p>無料です。Windows 10 / 11（64bit）で動きます。どちらの版も、新しいバージョンが出ると自動で更新されます。</p>
+      <p>PSD 3D Paint は無料でお使いいただけます。対応 OS は Windows 10 / 11（64bit）です。</p>
     </div>
 
     <section style="padding:36px 0 20px">
       <div class="notice" data-if-unconfigured>
-        <strong>準備中:</strong> 配布ページはまだ公開されていません。公開されるとこのボタンから最新版をダウンロードできるようになります。
+        ただいま準備中です。公開されると、このページから最新版をダウンロードできます。
       </div>
       <div class="release-info">
         <span>最新版: <b data-release="version">—</b></span>
         <span>公開日: <b data-release="date">—</b></span>
-        <a data-release="notes" class="gh-link" data-gh="latest">変更内容を見る</a>
+        <a data-release="notes" class="gh-link" data-gh="latest">変更内容</a>
         <a class="gh-link" data-gh="releases">過去のバージョン</a>
       </div>
 
@@ -47,20 +47,13 @@
           <span class="badge">おすすめ</span>
           <h3 style="font-size:1.3rem">インストーラー版</h3>
           <p class="file" data-file="setup">PSD-3D-Paint-Setup-&lt;バージョン&gt;.exe</p>
-          <ul>
-            <li>ダブルクリックでインストール（管理者権限は不要）</li>
-            <li>スタートメニューとデスクトップにショートカット</li>
-            <li>新しい版が出ると起動時に「更新しますか？」と表示 → 「更新する」で入れ替え</li>
-          </ul>
+          <p>パソコンにインストールして使います。スタートメニューとデスクトップにショートカットが作られます。</p>
           <a class="btn primary big" data-asset="setup">インストーラーをダウンロード <small data-size></small></a>
         </div>
         <div class="card dl-card">
           <h3 style="font-size:1.3rem">ポータブル版</h3>
           <p class="file" data-file="portable">PSD-3D-Paint-&lt;バージョン&gt;-portable.exe</p>
-          <ul>
-            <li>インストール不要の 1 ファイル。USB メモリや好きなフォルダーに置いて使えます</li>
-            <li>更新があると、同じファイル名のまま新しい版に置き換わります（ショートカットもそのまま）</li>
-          </ul>
+          <p>インストールせずに、ファイルをダブルクリックするだけで使えます。好きなフォルダーに置いて使いたい方向けです。</p>
           <a class="btn big" data-asset="portable">ポータブル版をダウンロード <small data-size></small></a>
         </div>
       </div>
@@ -69,32 +62,24 @@
     <div class="docs" style="grid-template-columns:1fr;padding-top:20px">
       <div class="content">
         <section id="install">
-          <h2>インストールと起動</h2>
+          <h2>インストール</h2>
           <ol>
-            <li>上のボタンから <strong>インストーラー版</strong>（または ポータブル版）をダウンロードします。</li>
-            <li>ダウンロードした <code>.exe</code> をダブルクリックします。インストーラー版は数秒でインストールが終わり、そのまま起動します。</li>
-            <li>スタート画面が開いたら、<strong>3D モデルを開く</strong>・<strong>PSD を開く</strong>・<strong>新規</strong> のどれかから始めます。</li>
+            <li>上のボタンからファイルをダウンロードします。</li>
+            <li>ダウンロードした <code>.exe</code> をダブルクリックします。インストーラー版は、インストールが終わるとそのまま起動します。</li>
+            <li>スタート画面が開いたら、<strong>3D モデルを開く</strong> からモデルを読み込んで始めます。</li>
           </ol>
-          <figure class="shot mid"><img src="images/welcome.webp" width="1080" height="498" loading="lazy" alt="スタート画面。新規、画像を開く、PSD を開く、3D モデルを開くのボタンと、最近開いたファイルの一覧" /></figure>
+          <figure class="shot mid"><img data-img="welcome" src="images/welcome.webp" width="1080" height="498" loading="lazy" alt="スタート画面" /></figure>
           <div class="warn">
-            <strong>「Windows によって PC が保護されました」と出たとき:</strong>
-            コード署名をしていないため、初回は Windows SmartScreen の警告が出ることがあります。
-            <strong>［詳細情報］→［実行］</strong> で起動できます。
+            <strong>「Windows によって PC が保護されました」と表示されたら</strong><br />
+            ［詳細情報］を押してから［実行］を押してください。インストール中に「このアプリがデバイスに変更を加えることを許可しますか？」と表示された場合は［はい］を押します。
           </div>
         </section>
 
         <section id="update">
           <h2>アップデート</h2>
-          <p>
-            起動するとアプリが新しいバージョンを確認し、あれば <strong>「新しいバージョンがあります」</strong> という画面で
-            いまのバージョン → 新しいバージョンと変更内容を表示します。<strong>更新する</strong> を押すと作業を続けたままダウンロードし、
-            終わったらウィンドウ上部の <strong>再起動して更新</strong> で入れ替わります。「あとで」「このバージョンをスキップ」も選べます。
-          </p>
-          <figure class="shot"><img src="images/update-banner.webp" width="1600" height="211" loading="lazy" alt="更新バー" /></figure>
-          <ul>
-            <li>手動で確認: <strong>ヘルプ ＞ 更新を確認…</strong></li>
-            <li>自動確認を止める: <strong>ヘルプ ＞ 起動時に自動で更新を確認</strong> のチェックを外す</li>
-          </ul>
+          <p>新しいバージョンが公開されると、アプリの起動時にお知らせが表示されます。<strong>更新する</strong> を押すとダウンロードが始まり、終わったら画面上部の <strong>再起動して更新</strong> を押すと新しいバージョンになります。アンインストールやダウンロードのし直しは必要ありません。</p>
+          <figure class="shot"><img data-img="update" src="images/update-banner.webp" width="1600" height="211" loading="lazy" alt="アップデートのお知らせ" /></figure>
+          <p>いまのバージョンは、アプリの <strong>ヘルプ ＞ バージョン情報…</strong> で確認できます。</p>
         </section>
 
         <section id="requirements">
@@ -102,19 +87,15 @@
           <table>
             <tbody>
               <tr><th>OS</th><td>Windows 10 / 11（64bit）</td></tr>
-              <tr><th>GPU</th><td>WebGL 2 が動くもの（内蔵 GPU でも可。15 万ポリゴンを超えるモデルは自動で軽量表示になります）</td></tr>
-              <tr><th>メモリ</th><td>目安 8 GB 以上（4K テクスチャや大きなモデルを扱うなら多いほど快適）</td></tr>
-              <tr><th>Python（任意）</th><td>Python プラグインを使う場合のみ。Python 3 と、必要なら <code>numpy</code></td></tr>
+              <tr><th>メモリ</th><td>8 GB 以上を推奨</td></tr>
             </tbody>
           </table>
         </section>
 
         <section id="uninstall">
           <h2>アンインストール</h2>
-          <p>インストーラー版は Windows の <strong>設定 ＞ アプリ</strong> から削除できます。ポータブル版は <code>.exe</code> を消すだけです。</p>
-          <p>設定や最近開いたファイルの履歴は <code>%APPDATA%\PSD 3D Paint\</code> に残ります。完全に消したい場合はこのフォルダーも削除してください（保存したプロジェクト <code>.p3dp</code> は別の場所なので消えません）。</p>
+          <p>インストーラー版は、Windows の <strong>設定 ＞ アプリ</strong> から削除できます。ポータブル版は、ダウンロードした <code>.exe</code> を削除するだけです。</p>
         </section>
-
       </div>
     </div>
   </main>
@@ -123,7 +104,7 @@
     <div class="wrap">
       <div class="cols">
         <div>
-          <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+          <a class="brand" href="index.html"><img data-img="icon" src="images/icon-256.png" alt="" />PSD 3D Paint</a>
           <p style="margin:10px 0 0;max-width:340px">3D モデルに直接ペイントできる Windows 用アプリ。</p>
         </div>
         <div><h4>サイト</h4><ul><li><a href="download.html">ダウンロード</a></li><li><a href="guide.html">使い方</a></li><li><a href="plugins.html">プラグイン</a></li><li><a href="faq.html">よくある質問</a></li></ul></div>
@@ -133,6 +114,7 @@
     </div>
   </footer>
   <script src="assets/config.js"></script>
+  <script src="assets/images.js"></script>
   <script src="assets/site.js"></script>
 </body>
 </html>

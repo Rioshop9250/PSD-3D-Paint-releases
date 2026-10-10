@@ -13,7 +13,7 @@
 <body>
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+      <a class="brand" href="index.html"><img data-img="icon" src="images/icon-256.png" alt="" />PSD 3D Paint</a>
       <button class="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
       <nav class="nav">
         <a href="index.html">トップ</a>
@@ -56,7 +56,7 @@
         <section id="install">
           <h2>導入する</h2>
           <div class="inline-shots">
-            <figure class="shot" style="flex:1 1 420px"><img src="images/plugin-settings.webp" width="840" height="591" loading="lazy" alt="環境設定のプラグインタブ。導入済みのプラグイン一覧と、ファイルから導入・フォルダ・再読込・Python設定ボタン" /></figure>
+            <figure class="shot" style="flex:1 1 420px"><img data-img="plugin-settings" src="images/plugin-settings.webp" width="840" height="591" loading="lazy" alt="環境設定のプラグインタブ。導入済みのプラグイン一覧と、ファイルから導入・フォルダ・再読込・Python設定ボタン" /></figure>
             <div style="flex:1 1 300px">
               <ol>
                 <li><strong>Python 3</strong> を入れます（<a href="https://www.python.org/downloads/windows/" rel="noopener">python.org</a>）。画像処理をするプラグインには <code>pip install numpy</code> も必要です。</li>
@@ -80,7 +80,7 @@
             <div class="card"><h3>AO をベイクして合成</h3><p><code>bake_and_flatten.py</code> — フィルター ＞ 3D。AO を焼いて乗算で重ねます。</p></div>
             <div class="card"><h3>こんにちは（情報表示）</h3><p><code>hello_world.py</code> — フィルター ＞ Python ＞ 例。いちばん小さい例。</p></div>
           </div>
-          <figure class="shot narrow" style="margin-top:24px"><img src="images/filter-menu.webp" width="440" height="820" loading="lazy" alt="フィルターメニュー。下半分に Python / ぼかし / 色 / 3D のプラグイン項目" /><figcaption>プラグインはフィルターメニューの下半分に並びます。</figcaption></figure>
+          <figure class="shot narrow" style="margin-top:24px"><img data-img="filter" src="images/filter-menu.webp" width="440" height="820" loading="lazy" alt="フィルターメニュー。下半分に Python / ぼかし / 色 / 3D のプラグイン項目" /><figcaption>プラグインはフィルターメニューの下半分に並びます。</figcaption></figure>
         </section>
 
         <section id="hello">
@@ -252,7 +252,7 @@ psdpaint.run()</code></pre>
     <div class="wrap">
       <div class="cols">
         <div>
-          <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+          <a class="brand" href="index.html"><img data-img="icon" src="images/icon-256.png" alt="" />PSD 3D Paint</a>
           <p style="margin:10px 0 0;max-width:340px">3D モデルに直接ペイントできる Windows 用アプリ。</p>
         </div>
         <div><h4>サイト</h4><ul><li><a href="download.html">ダウンロード</a></li><li><a href="guide.html">使い方</a></li><li><a href="plugins.html">プラグイン</a></li><li><a href="faq.html">よくある質問</a></li></ul></div>
@@ -262,6 +262,7 @@ psdpaint.run()</code></pre>
     </div>
   </footer>
   <script src="assets/config.js"></script>
+  <script src="assets/images.js"></script>
   <script src="assets/site.js"></script>
 </body>
 </html>

@@ -16,7 +16,7 @@
 <body>
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+      <a class="brand" href="index.html"><img data-img="icon" src="images/icon-256.png" alt="" />PSD 3D Paint</a>
       <button class="nav-toggle" aria-label="メニュー" aria-expanded="false">☰</button>
       <nav class="nav">
         <a href="index.html" class="active">トップ</a>
@@ -44,7 +44,7 @@
         </div>
         <p class="meta">Windows 10 / 11（64bit）・インストール不要のポータブル版あり・自動アップデート対応</p>
         <div class="hero-shot shot">
-          <img src="images/hero-paint.webp" width="1600" height="904" alt="PSD 3D Paint のペイント画面。中央の 3D ビューにグラデーションと模様が塗られた結び目の形のモデル、左にカラーパネル、右にレイヤーパネル。" />
+          <img data-img="hero" src="images/hero-paint.webp" width="1600" height="904" alt="PSD 3D Paint のペイント画面。中央の 3D ビューにグラデーションと模様が塗られた結び目の形のモデル、左にカラーパネル、右にレイヤーパネル。" />
         </div>
       </div>
     </section>
@@ -70,15 +70,15 @@
         <div class="feature">
           <div class="text">
             <p class="eyebrow">Paint</p>
-            <h3>3D と 2D を並べて、同じ絵を描く</h3>
-            <p>3D ビューで塗った内容は、すぐ 2D（テクスチャ）ビューにも反映されます。細かい所は 2D で、形に沿った所は 3D で。どちらも同じレイヤー・同じ取り消し履歴を共有します。</p>
+            <h3>3D モデルの上に、直接描く</h3>
+            <p>モデルの表面をブラシでなぞれば、そのままテクスチャに描かれます。UV 展開を見ながら位置を合わせる必要はありません。描いた絵はレイヤーとして残るので、あとから消したり重ねたりできます。</p>
             <ul>
-              <li>グラデーションは 3D の位置で塗れるので、UV の島をまたいでもきれいにつながる</li>
+              <li>UV の継ぎ目をまたいでも、線がとぎれずに描ける</li>
+              <li>グラデーションもモデルの上でドラッグするだけ</li>
               <li>凹凸（ノーマル）モードで、塗るだけで盛り上げ・彫り込み</li>
-              <li>AO・影・法線をテクスチャへベイク</li>
             </ul>
           </div>
-          <div class="shot"><img src="images/split-view.webp" width="1600" height="904" loading="lazy" alt="3D ビューと 2D テクスチャビューを並べて表示した画面" /></div>
+          <div class="shot"><img data-img="paint" src="images/hero-paint.webp" width="1600" height="904" loading="lazy" alt="3D モデルに直接ペイントしている画面" /></div>
         </div>
 
         <div class="feature rev">
@@ -87,7 +87,7 @@
             <h3>見たいメッシュだけを表示して塗る</h3>
             <p>カーソルを合わせて <kbd>/</kbd> を押すと、そのメッシュだけを表示します（Blender と同じ操作）。<kbd>Shift</kbd>+<kbd>H</kbd> でパーツだけ、<kbd>H</kbd> でパーツを隠す。服の下や髪の内側など、ふだん見えない所も塗れます。</p>
           </div>
-          <div class="shot"><img src="images/isolate-mesh.webp" width="1600" height="904" loading="lazy" alt="メッシュ「Body」だけを表示している 3D ビュー" /></div>
+          <div class="shot"><img data-img="isolate" src="images/isolate-mesh.webp" width="1600" height="904" loading="lazy" alt="メッシュ「Body」だけを表示している 3D ビュー" /></div>
         </div>
 
         <div class="feature">
@@ -100,7 +100,7 @@
               <li>Unity Humanoid（マッスル値）の <code>.anim</code> で書き出し</li>
             </ul>
           </div>
-          <div class="shot"><img src="images/anim-workspace.webp" width="1600" height="904" loading="lazy" alt="アニメーション ワークスペース。人形のモデルが歩くポーズで、下にキーフレームのタイムライン" /></div>
+          <div class="shot"><img data-img="anim" src="images/anim-workspace.webp" width="1600" height="904" loading="lazy" alt="アニメーション ワークスペース。人形のモデルが歩くポーズで、下にキーフレームのタイムライン" /></div>
         </div>
       </div>
     </section>
@@ -138,7 +138,7 @@
             <p class="eyebrow">Updates</p>
             <h2 class="title">更新は自動で</h2>
             <p class="sub">新しいバージョンが出ると、起動時に「更新しますか？」と聞いてくれます。「更新する」→「再起動して更新」を押すだけ。アンインストールや再ダウンロードは要りません。</p>
-            <div class="shot"><img src="images/update-banner.webp" width="1600" height="211" loading="lazy" alt="「新しいバージョンの準備ができました」と表示された更新バー" /></div>
+            <div class="shot"><img data-img="update" src="images/update-banner.webp" width="1600" height="211" loading="lazy" alt="「新しいバージョンの準備ができました」と表示された更新バー" /></div>
           </div>
         </div>
       </div>
@@ -162,7 +162,7 @@
     <div class="wrap">
       <div class="cols">
         <div>
-          <a class="brand" href="index.html"><img src="images/icon-256.png" alt="" />PSD 3D Paint</a>
+          <a class="brand" href="index.html"><img data-img="icon" src="images/icon-256.png" alt="" />PSD 3D Paint</a>
           <p style="margin:10px 0 0;max-width:340px">3D モデルに直接ペイントできる Windows 用アプリ。</p>
         </div>
         <div><h4>サイト</h4><ul><li><a href="download.html">ダウンロード</a></li><li><a href="guide.html">使い方</a></li><li><a href="plugins.html">プラグイン</a></li><li><a href="faq.html">よくある質問</a></li></ul></div>
@@ -172,6 +172,7 @@
     </div>
   </footer>
   <script src="assets/config.js"></script>
+  <script src="assets/images.js"></script>
   <script src="assets/site.js"></script>
 </body>
 </html>

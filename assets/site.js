@@ -1,5 +1,16 @@
 // Shared behaviour for every page: mobile nav, GitHub links, latest-release
 // download buttons and the guide's table-of-contents highlight.
+// ---- images: site/assets/images.js decides which file each spot shows (edit with images.html)
+(function () {
+  const map = window.SITE_IMAGES || {};
+  document.querySelectorAll('img[data-img]').forEach((img) => {
+    const c = map[img.dataset.img];
+    if (!c || !c.file) return;
+    img.src = 'images/' + c.file + (c.v ? '?v=' + c.v : '');
+    if (c.alt != null && img.alt !== '') img.alt = c.alt;
+  });
+})();
+
 (function () {
   const cfg = window.SITE_CONFIG || {};
   const configured = cfg.owner && cfg.repo && !/^(OWNER|REPO)$/i.test(cfg.owner);
